@@ -19,6 +19,13 @@ Install Django REST framework
   `pip install markdown `      # Markdown support for the browsable API.
   `pip install django-filter`  # Filtering support
 
+Hide secret key
+  create a new file such as secrets.py, and then in the cut-paste the `SECRET_KEY` into it
+  Update the key in the settings
+    from secrets import key
+    ...
+    SECRET_KEY = key
+
 Add 'rest_framework' to your `INSTALLED_APPS` in the `settings.py` file
   INSTALLED_APPS = [
     ...
@@ -51,3 +58,8 @@ This is followed up with the url scheme:
     path('readings/', ReadingList.as_view()),
     path('readings/<int:pk>/', ReadingDetail.as_view())
   ]
+
+
+# Set up user login (WIP):
+-View handles the login triggered by the request to the url endpoint
+-Trying to do this without coupling it to webpack
