@@ -1,4 +1,4 @@
-# django-setup
+# (WIP) Instructions for fresh django set up
 Install pip
   for Debian/Ubuntu:
     `sudo apt install python3-pip`
@@ -59,8 +59,6 @@ This is followed up with the url scheme:
     path('readings/<int:pk>/', ReadingDetail.as_view())
   ]
 
-
-# Set up user login (WIP):
 Add the default authentication credentials
   REST_FRAMEWORK = {
       'DEFAULT_AUTHENTICATION_CLASSES': [
@@ -73,4 +71,12 @@ Add the default authentication credentials
 -Trying to do this without coupling it to webpack
 
 
-For parsing arbitrary information from the
+# Instructions for deploying the repo:
+Anywhere in PC: `sudo apt install python3-pip`
+In the django-setup folder at same level with sugar-venv: `source sugar-venv/bin/activate`
+Anywhere if still in sugar-venv:
+`python -m pip install Django`
+`pip install djangorestframework`
+`pip install markdown `      # Markdown support for the browsable API (Probably optional)
+`pip install django-filter`  # Filtering support
+`pip install django-cors-headers`
