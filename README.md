@@ -61,5 +61,16 @@ This is followed up with the url scheme:
 
 
 # Set up user login (WIP):
+Add the default authentication credentials
+  REST_FRAMEWORK = {
+      'DEFAULT_AUTHENTICATION_CLASSES': [
+          'rest_framework.authentication.BasicAuthentication',
+          'rest_framework.authentication.SessionAuthentication',
+          'rest_framework.authentication.TokenAuthentication'
+      ]
+  }
 -View handles the login triggered by the request to the url endpoint
 -Trying to do this without coupling it to webpack
+
+
+For parsing arbitrary information from the

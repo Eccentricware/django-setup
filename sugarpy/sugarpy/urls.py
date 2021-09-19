@@ -15,11 +15,11 @@ Including another URLconf
 """
 from django.urls import path, include
 from django.contrib import admin
-from sugarpy.views import login
+
 from django.contrib.auth.models import User
 from rest_framework import routers, serializers, viewsets
 from rest_framework.authtoken.views import obtain_auth_token
-from readings.views import ReadingList, ReadingDetail
+from readings.views import ReadingDetail, ReadingList, ReadingListTimeSpan
 
 # Serializers define the API representation
 class UserSerializer(serializers.HyperlinkedModelSerializer):
@@ -45,5 +45,6 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls')),
     #path('api/login/', login),
     path('api/readings/', ReadingList.as_view()),
-    path('api/readings/<int:pk>/', ReadingDetail.as_view())
+    #path('api/readings/<int:pk>/', ReadingDetail.as_view())
+    path('api/readings_since/<int:days_ago>/', ReadingListTimeSpan.as_view())
 ]
