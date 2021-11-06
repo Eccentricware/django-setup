@@ -71,10 +71,11 @@ Add the default authentication credentials
 -Trying to do this without coupling it to webpack
 
 
-# Instructions for deploying the repo:
-Anywhere in PC: `sudo apt install python3-pip`
-In the django-setup folder at same level with sugar-venv: `source sugar-venv/bin/activate`
-Anywhere if still in sugar-venv:
+# Instructions for integrating django:
+The trickiest part is reproducing the virtual environment on the computer in question
+Pull down repo as normal:
+In the server directory (sugarChart/server/): `python3 -m venv sugar-venv`
+`source sugar-venv/bin/activate` (To deactivate the virtual environment just use `deactivate`)
 `python -m pip install Django`
 `pip install djangorestframework`
 `pip install markdown `      # Markdown support for the browsable API (Probably optional)
