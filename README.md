@@ -1,4 +1,4 @@
-# django-setup
+# (WIP) Instructions for fresh django set up
 Install pip
   for Debian/Ubuntu:
     `sudo apt install python3-pip`
@@ -59,7 +59,25 @@ This is followed up with the url scheme:
     path('readings/<int:pk>/', ReadingDetail.as_view())
   ]
 
-
-# Set up user login (WIP):
+Add the default authentication credentials
+  REST_FRAMEWORK = {
+      'DEFAULT_AUTHENTICATION_CLASSES': [
+          'rest_framework.authentication.BasicAuthentication',
+          'rest_framework.authentication.SessionAuthentication',
+          'rest_framework.authentication.TokenAuthentication'
+      ]
+  }
 -View handles the login triggered by the request to the url endpoint
 -Trying to do this without coupling it to webpack
+
+
+# Instructions for integrating django:
+The trickiest part is reproducing the virtual environment on the computer in question
+Pull down repo as normal:
+In the server directory (sugarChart/server/): `python3 -m venv sugar-venv`
+`source sugar-venv/bin/activate` (To deactivate the virtual environment just use `deactivate`)
+`python -m pip install Django`
+`pip install djangorestframework`
+`pip install markdown `      # Markdown support for the browsable API (Probably optional)
+`pip install django-filter`  # Filtering support
+`pip install django-cors-headers`
