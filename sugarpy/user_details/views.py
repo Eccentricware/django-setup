@@ -5,6 +5,7 @@ from rest_framework.decorators import action
 from rest_framework.permissions import IsAdminUser
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from sugarpy.mixins import InjectUrlDataMixin
 from user_details.models import UserDetail as UserDetailModel
 from user_details.serializers import UserDetailSerializer, UserSerializer, RegisterUserSerializer
 from user_details.permissions import IsAdminOrCurrentUser
@@ -55,18 +56,15 @@ class NewUser(generics.ListCreateAPIView):
   def perform_create(self, serializer):
     serializer.save()
 
-# class UserPasswordUpdate(generics.ListCreateAPIView):
-#   def get_queryset(self):
-#     username = self.request.user.username
-#     return User.objects.filter(username=user_id)
-#   serializer_class = UpdateUserPasswordSerializer
-#   permissions_classes = (
-#     IsAdminOrCurrentUser
-#   )
-
-#   @action(detail=True, renderer_classes=[renderers.StaticHTMLRenderer])
-#   def perform_create(self, serializer):
-#     serializer.save()
+class CheckUsernameAvailability(APIView, InjectUrlDataMixin):
+  def get(self, request, *args, **kwargs):
+    username = self.kwargs['username']
+    user = User.objects.filter(username=username)
+    print(user)
+    if len(user) > 0:
+      return Response(False)
+    else:
+      return Response(True)
 
 class UserList(generics.ListCreateAPIView):
   def get_queryset(self):

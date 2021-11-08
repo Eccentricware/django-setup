@@ -1,2 +1,9 @@
-sugarpy/sugarpy/secrets.py
 sugar-venv
+
+sugarpy/sugarpy/secrets.py
+sugarpy/sugarpy/__pycache__/
+sugarpy/readings/__pycache__/
+sugarpy/readings/migrations/
+sugarpy/sugarchart_user/
+sugarpy/user_details/__pycache__/
+sugarpy/user_details/migrations/
