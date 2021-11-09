@@ -83,18 +83,6 @@ class UserList(generics.ListCreateAPIView):
   @action(detail=True, renderer_classes=[renderers.StaticHTMLRenderer])
   def perform_create(self, serializer):
     serializer.save()
-    # new_user = User.objects.create_user(
-    #   'hard_test_2',
-    #   'hard2@test.sometimes',
-    #   'Test1379'
-    # )
-    # # new_user_id = new_user.id
-    # # new_user_detail = UserDetail.objects.create(
-    # #   user = new_user_id,
-    # #   age = 25,
-    # #   weight = 150,
-    # #   timezone = 'US/Pacific'
-    # # )
 
 class UserSelfDetail(generics.ListCreateAPIView):
   def get_queryset(self):
@@ -142,7 +130,19 @@ class UserDetailList(generics.ListCreateAPIView):
 
   @action(detail=True, renderer_classes=[renderers.StaticHTMLRenderer])
   def perform_create(self, serializer):
-    serializer.save(user_id=self.request.user.id)
+    print(self.request.data)
+    if self.request.data['date_of_birth'] == '1970-01-01':
+      date_of_birth = None
+    else:
+      date_of_birth = self.request.data['date_of_birth']
+    if self.request.data['timezone'] == '':
+      timezone = 'UTC'
+    else:
+      timezone = self.request.data['timezone']
+    serializer.save(
+      user_id=self.request.user.id,
+      date_of_birth=date_of_birth,
+      timezone=timezone)
 
 class SinglerUserDetail(generics.RetrieveUpdateDestroyAPIView):
   def get_queryset(self):
