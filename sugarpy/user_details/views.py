@@ -12,7 +12,6 @@ from user_details.permissions import IsAdminOrCurrentUser
 
 class LoginStatus(APIView):
   def get(self, request):
-    print(self.request.user)
     if self.request.user.is_anonymous:
       return Response(False)
     else:
@@ -32,8 +31,6 @@ class ChangePassword(APIView):
 
   def update_password(self, request):
     password = request.data['password']
-    print('PASSWORD IS')
-    print(password)
     request.user.set_password(password)
     request.user.save()
     return Response('Password updated')
@@ -60,7 +57,6 @@ class CheckUsernameAvailability(APIView, InjectUrlDataMixin):
   def get(self, request, *args, **kwargs):
     username = self.kwargs['username']
     user = User.objects.filter(username=username)
-    print(user)
     if len(user) > 0:
       return Response(False)
     else:
@@ -86,7 +82,6 @@ class UserList(generics.ListCreateAPIView):
 
 class UserSelfDetail(generics.ListCreateAPIView):
   def get_queryset(self):
-    #id = self.kwargs['pk']
     if self.request.user.is_staff == True:
       return User.objects.filter(id=id)
     elif not self.request.user.is_anonymous:
@@ -130,7 +125,6 @@ class UserDetailList(generics.ListCreateAPIView):
 
   @action(detail=True, renderer_classes=[renderers.StaticHTMLRenderer])
   def perform_create(self, serializer):
-    print(self.request.data)
     if self.request.data['date_of_birth'] == '1970-01-01':
       date_of_birth = None
     else:

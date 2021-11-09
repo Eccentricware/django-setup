@@ -22,40 +22,9 @@ from rest_framework.authtoken.views import obtain_auth_token
 
 from readings.views import ReadingDetail, ReadingList, ReadingListTimeSpan
 from user_details.views import SinglerUserDetail, UserDetailList, UserList, UserDetail, NewUser, UserSelfDetail, Logout, ChangePassword, LoginStatus, CheckUsernameAvailability
-#from sugarchart_user.views import SugarChartUserList, SugarChartUserDetail
-
-#from user_details.serializers import UserDetailSerializer
-
-#from sugarchart_user.models import SugarChartUser
-
-# Serializers define the API representation
-# class UserSerializer(serializers.HyperlinkedModelSerializer):
-#     #user_details = UserDetailSerializer(many=True, read_only=True)
-#     class Meta:
-#         model = User
-#         fields = ['id', 'username', 'first_name', 'last_name', 'email']
-
-# Serializers define the API representation
-# class SugarChartUserSerializer(serializers.HyperlinkedModelSerializer):
-#     #user_details = UserDetailSerializer(many=True, read_only=True)
-#     class Meta:
-#         model = SugarChartUser
-#         fields = ['username', 'first_name', 'last_name', 'email']
-
-# ViewSets define the view behavior
-# class UserViewSet(viewsets.ModelViewSet):
-#     queryset = User.objects.all()
-#     serializer_class = UserSerializer
-
-# ViewSets define the view behavior
-# class SugarChartUserViewSet(viewsets.ModelViewSet):
-#     queryset = SugarChartUser.objects.all()
-#     serializer_class = SugarChartUserSerializer
 
 # Routers provide an easy way of automatically determining the URL conf
 router = routers.DefaultRouter()
-#router.register(r'users', UserList.as_view())
-#router.register(r'sugarchart_users', SugarChartUserViewSet)
 
 # Wire up our API using automatic URL routing
 # Additionally, we include login URLs for the browsable API
@@ -72,7 +41,6 @@ urlpatterns = [
     path('user/logout/', Logout.as_view()),
     path('user/change_password/', ChangePassword.as_view()),
     path('api-auth/', include('rest_framework.urls')),
-    #path('api/login/', login),
     path('api/readings/', ReadingList.as_view()),
     path('api/readings/<int:pk>/', ReadingDetail.as_view()),
     path('api/readings_since/<int:days_ago>/', ReadingListTimeSpan.as_view()),
