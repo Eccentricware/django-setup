@@ -26,38 +26,9 @@ class RegisterUserSerializer(serializers.HyperlinkedModelSerializer):
     user.save()
     return user
 
-# class UpdateUserPasswordSerializer(serializers.HyperlinkedModelSerializer):
-#   class Meta:
-#     model = User
-#     fields = ['username', 'password']
-
-#   def create(self, validated_data):
-#     print(validated_data)
-#     user = User.objects.create_user(
-#       username=validated_data['username'],
-#       password=validated_data['password']
-#     )
-
-#     print(user.id)
-
-#     user.save()
-#     return user
-
 class UserSerializer(serializers.HyperlinkedModelSerializer):
   details = UserDetailSerializer(many=False, read_only=True)
 
   class Meta:
     model = User
     fields = ['username', 'details']
-
-  # def create(self, validated_data):
-  #   print(validated_data)
-  #   user = User.objects.create_user(
-  #     username=validated_data['username'],
-  #     password=validated_data['password']
-  #   )
-
-  #   print(user.id)
-
-  #   user.save()
-  #   return user
