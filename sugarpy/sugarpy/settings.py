@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
-from sugarpy.secrets import key
+from sugarpy.secrets import key, super_tasty_secret_sugary_db_credentials, allowed_hosts
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -24,10 +24,17 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = key
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = allowed_hosts
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 
+SECURE_HSTS_SECONDS = 5
+
+SESSION_COOKIE_SECURE = True
+SECURE_SSL_REDIRECT = False
+CSRF_COOKIE_SECURE = True
+SECURE_HSTS_PRELOAD = True
 
 # Application definition
 
@@ -41,7 +48,6 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'readings.apps.ReadingsConfig',
-    #'sugarchart_user.apps.SugarchartUserConfig',
     'user_details.apps.UserDetailsConfig',
     'corsheaders'
 ]
@@ -82,13 +88,8 @@ WSGI_APPLICATION = 'sugarpy.wsgi.application'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': super_tasty_secret_sugary_db_credentials
 }
-
-#AUTH_USER_MODEL = 'sugarchart_user.SugarChartUser'
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -144,5 +145,6 @@ REST_FRAMEWORK = {
 CORS_ORIGIN_ALLOW_ALL = False
 
 CORS_ORIGIN_WHITELIST = [
+    'https://vercel.app',
     'http://localhost:3000'
 ]
